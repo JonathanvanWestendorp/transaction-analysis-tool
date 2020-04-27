@@ -6,6 +6,4 @@ RUN apt-get update
 RUN apt-get -y install curl gnupg
 RUN curl -sL https://deb.nodesource.com/setup_10.x  | bash -
 RUN apt-get -y install nodejs
-RUN npm install && \
-    npm install express && \
-    npm install solc
+RUN npm install
