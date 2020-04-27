@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="fileInput">
-      <form action="http://http://34.70.222.117:3000/compile" method="post" enctype="multipart/form-data">
+      <form action="http://34.70.222.117:3000/compile" method="post" enctype="multipart/form-data">
           <div>
             <input type="file" id="contract">
           </div>
