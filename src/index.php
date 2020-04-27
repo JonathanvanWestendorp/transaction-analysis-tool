@@ -5,11 +5,11 @@
     <title>
       Transaction Analysis
     </title>
-    <script type="text/javascript" src="src/contract.js"></script>
+    <script type="text/javascript" src="passContract.js"></script>
   </head>
   <body>
     <div class="fileInput">
-      <form onsubmit="parseContract()">
+      <form action="http://localhost:3000/compile" method="post" enctype="multipart/form-data">
           <div>
             <input type="file" id="contract">
           </div>
