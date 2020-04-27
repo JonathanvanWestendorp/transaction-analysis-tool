@@ -5,7 +5,7 @@
     <title>
       Transaction Analysis
     </title>
-    <script type="text/javascript" src="contract.js"></script>
+    <script type="text/javascript" src="src/contract.js"></script>
   </head>
   <body>
     <div class="fileInput">

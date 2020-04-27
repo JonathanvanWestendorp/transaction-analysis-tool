@@ -1,0 +1,14 @@
+{
+    "name": "html",
+    "version": "1.0.0",
+    "description": "Express handler for contract compilation",
+    "dependencies": {
+        "express": "latest",
+        "solc": "0.6.6"
+    },
+    "main": "index.js",
+    "keywords": [],
+    "author": "Jonathan van Westendorp",
+    "license": "ISC"
+  }
+  
