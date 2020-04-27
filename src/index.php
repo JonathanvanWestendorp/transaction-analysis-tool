@@ -5,7 +5,6 @@
     <title>
       Transaction Analysis
     </title>
-    <script type="text/javascript" src="passContract.js"></script>
   </head>
   <body>
     <div class="fileInput">
