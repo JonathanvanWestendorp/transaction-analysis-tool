@@ -10,7 +10,16 @@
         </div>
         <div>
           <?php
-            echo "This Works!";
+            for ($x = 0; $x <= 10; $x++) {
+              echo "
+              <div>
+                <button class='command 1'>
+                  register
+                </button>
+                <input placeholder='parameters 1'>
+              </div>
+              ";
+            }
           ?>
         </div>
       </div>
