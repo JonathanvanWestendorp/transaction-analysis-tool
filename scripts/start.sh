@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Checking for running tool..."
-if [ "$(docker ps -q -f name=tx-tool)" ]; then
+if [ "$(docker ps -aq -f name=tx-tool)" ]; then
     /bin/bash ./stop.sh
 fi
 
