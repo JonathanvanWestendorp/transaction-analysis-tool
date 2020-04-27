@@ -1,4 +1,5 @@
 FROM php:7.3-apache
+COPY src/ var/www/html/
 
 # Install npm, node, solcjs and expressjs
 WORKDIR /var/www/html/
