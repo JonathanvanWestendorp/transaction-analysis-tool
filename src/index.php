@@ -17,7 +17,6 @@
             <input type="submit" value="Submit">
           </div>
       </form>
-      
     </div>
     <div class="callableFunctions">
       <?php
