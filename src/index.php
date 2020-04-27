@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 
 <html style="--theme:dark;">
-  <title>
-    Transaction Analysis
-  </title>
   <head>
+    <title>
+      Transaction Analysis
+    </title>
     <script type="text/javascript" src="contract.js"></script>
   </head>
   <body>
     <div class="fileInput">
-      <form>
+      <form onsubmit="parseContract()">
           <div>
             <input type="file" id="contract">
           </div>

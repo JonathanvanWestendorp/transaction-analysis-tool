@@ -1,8 +1,9 @@
 //var solc = require('solc');
 
-document.getElementById("contract").addEventListener("change", parseContract, false);
-
 function parseContract() {
-    console.log("File has arrived successfully");
-    console.log(this.files[0]);
+    const contract = document.getElementById("contract");
+    if (contract) {
+        alert("File has arrived successfully");
+        console.log(contract);
+    }   
 }
