@@ -9,6 +9,10 @@ app.use(busboy());
 app.post('/compile', function (req, res) {
     req.pipe(req.busboy);
     req.busboy.on('file', function (_, file, filename) {
+        var dir = 'uploads/';
+        if (!fs.existsSync('./' + dir)){
+            fs.mkdirSync('./' + dir);
+        }
         var saveTo = path.join(__dirname, 'uploads/' + filename);
         file.pipe(fs.createWriteStream(saveTo));
 
