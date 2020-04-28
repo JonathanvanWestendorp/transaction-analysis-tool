@@ -13,4 +13,4 @@ app.post('/compile', function (req, res) {
     res.send("Hij is binnen hoor");
 });
 
-var server = app.listen(3000);
+app.listen(3000);
