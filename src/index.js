@@ -8,7 +8,12 @@ app.use(busboy());
 app.post('/compile', function (req, res) {
     req.pipe(req.busboy);
     req.busboy.on('file', function (file, filename) {
-        var data = fs.readFile(file, "utf8");
+        data = fs.readFile(file, "utf8", function (err, data) {
+            if (err) {
+                throw err;
+            }
+            return data;
+        });
         var input = {
             language: 'Solidity',
             sources: {
