@@ -9,4 +9,3 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x  | bash -
 RUN apt-get -y install nodejs
 RUN npm install
 CMD node index.js
-EXPOSE 3000
