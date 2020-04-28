@@ -8,29 +8,30 @@ app.use(busboy());
 app.post('/compile', function (req, res) {
     req.pipe(req.busboy);
     req.busboy.on('file', function (file, filename) {
-        data = fs.readFile(file, "utf8", function (err, data) {
-            if (err) {
-                throw err;
-            }
-            return data;
-        });
-        var input = {
-            language: 'Solidity',
-            sources: {
-                [filename]: {
-                    content: data
-                }
-            },
-            settings: {
-                outputSelection: {
-                    '*': {
-                        '*': ['*']
-                    }
-                }
-            }
-        };
-        var output = JSON.parse(solc.compile(JSON.stringify(input)));
-        console.log(output);
+        console.log(file);
+        // data = fs.readFile(file, "utf8", function (err, data) {
+        //     if (err) {
+        //         throw err;
+        //     }
+        //     return data;
+        // });
+        // var input = {
+        //     language: 'Solidity',
+        //     sources: {
+        //         [filename]: {
+        //             content: data
+        //         }
+        //     },
+        //     settings: {
+        //         outputSelection: {
+        //             '*': {
+        //                 '*': ['*']
+        //             }
+        //         }
+        //     }
+        // };
+        // var output = JSON.parse(solc.compile(JSON.stringify(input)));
+        // console.log(output);
     });
     res.status(200).send({ontvangen: true});
 });
