@@ -20,7 +20,6 @@ app.post('/compile', function (req, res) {
             if (err) {
                 throw(err);
             }
-            console.log(data);
             return data;
         })
         var input = {
@@ -38,7 +37,9 @@ app.post('/compile', function (req, res) {
                 }
             }
         };
-        // var output = JSON.parse(solc.compile(JSON.stringify(input)));
+        var stringifiedInput = JSON.stringify(input);
+        console.log(stringifiedInput);
+        // var output = JSON.parse(solc.compile());
         // console.log(output);
     });
     res.status(200).send({ontvangen: true});
