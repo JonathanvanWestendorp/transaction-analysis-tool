@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="fileInput">
-      <form action="http://localhost:3000/compile" method="post">
+      <form action="http://34.68.150.1:3000/compile" method="post">
           <div>
             <input type="file" id="contract">
           </div>
