@@ -7,7 +7,7 @@ const app = express();
 // app.use(express.multipart());
 
 app.post('/compile', function (req, res) {
-    console.log(req);
+    console.log(req.files);
     // compile with solidity
     res.status(200).send({ontvangen: true});
 });
