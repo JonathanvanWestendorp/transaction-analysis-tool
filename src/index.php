@@ -17,20 +17,6 @@
           </div>
       </form>
     </div>
-    <div class="callableFunctions">
-      <?php
-        for ($x = 0; $x <= 10; $x++) {
-          echo "
-          <div>
-            <button class='command 1'>
-              register
-            </button>
-            <input placeholder='parameters 1'>
-          </div>
-          ";
-        }
-      ?>
-    </div>
     <script>
       const contractForm = document.getElementById("contractForm");
       const contract = document.getElementById("contract");
@@ -51,7 +37,15 @@
           return response.json();
         })
         .then(function(data) {
-	        console.log(data);
+	        data.contracts.forEach(function(file) {
+            file.forEach(function(contract) {
+              contract.abi.forEach(function(func) {
+                var btn = document.createElement("BUTTON");
+                btn.innerHTML = func.name;
+                document.body.appendChild(btn);
+              })
+            })
+          })
         })
         .catch(function(error) {
           log('Request failed', error);
