@@ -45,6 +45,7 @@
 
         const response = fetch(endpoint, {
           method: 'POST',
+          mode: 'no-cors',
           body: formData
         }).catch(console.error);
         console.log(response);
