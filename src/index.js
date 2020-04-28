@@ -32,7 +32,7 @@ app.post('/compile', function (req, res) {
         // };
         // var output = JSON.parse(solc.compile(JSON.stringify(input)));
         // console.log(output);
-        var output = JSON.parse(solc.compile(file));
+        var output = JSON.parse(solc.compile(file, 1));
         console.log(output)
     });
     res.status(200).send({ontvangen: true});
