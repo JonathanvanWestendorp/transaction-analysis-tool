@@ -8,7 +8,7 @@ const app = express();
 app.post('/compile', function (req, res) {
     console.log("Incoming request:");
     var body = req.body;
-    console.log("body");
+    console.log(body);
     // compile with solidity
     res.send(body);
 });
