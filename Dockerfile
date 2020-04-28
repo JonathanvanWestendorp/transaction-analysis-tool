@@ -6,4 +6,4 @@ RUN apt-get -y install curl gnupg systemd
 RUN curl -sL https://deb.nodesource.com/setup_10.x  | bash -
 RUN apt-get -y install nodejs
 RUN npm install
-RUN node index.js
+CMD node index.js
