@@ -43,7 +43,7 @@
 
           formData.append("contract", contractInput.files[0]);
 
-          const response = await fetch(endpoint, {
+          const response = fetch(endpoint, {
             method: 'POST',
             body: formData
           }).catch(console.error);
