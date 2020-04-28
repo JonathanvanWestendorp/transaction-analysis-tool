@@ -7,9 +7,9 @@ app.use(busboy());
 
 app.post('/compile', function (req, res) {
     req.pipe(req.busboy);
-    req.busboy.on('file', function (_, file, filename, encoding) {
+    req.busboy.on('file', function (_, file, filename) {
         console.log(file);
-        data = fs.readFile(file, encoding, function (err, data) {
+        data = fs.readFile(file, "utf8", function (err, data) {
             if (err) {
                 throw err;
             }
