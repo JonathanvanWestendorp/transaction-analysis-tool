@@ -16,31 +16,31 @@ app.post('/compile', function (req, res) {
         var filepath = path.join(__dirname, 'uploads/' + filename);
         file.pipe(fs.createWriteStream(filepath));
         // Maybe this can be simplified..
-        const code = fs.readFile(filepath, "utf8", function (err, data) {
+        fs.readFile(filepath, "utf8", function (err, data) {
             if (err) {
                 throw(err);
             }
-            return data;
-        })
-        var input = {
-            language: 'Solidity',
-            sources: {
-                [filename]: {
-                    content: code
-                }
-            },
-            settings: {
-                outputSelection: {
-                    '*': {
-                        '*': ['*']
+            console.log(code);
+            var input = {
+                language: 'Solidity',
+                sources: {
+                    [filename]: {
+                        content: data
+                    }
+                },
+                settings: {
+                    outputSelection: {
+                        '*': {
+                            '*': ['*']
+                        }
                     }
                 }
-            }
-        };
-        var stringifiedInput = JSON.stringify(input);
-        console.log(stringifiedInput);
-        // var output = JSON.parse(solc.compile());
-        // console.log(output);
+            };
+            var stringifiedInput = JSON.stringify(input);
+            console.log(stringifiedInput);
+            var output = JSON.parse(solc.compile(JSON.stringify(input)));
+            console.log(output);
+        });
     });
     res.status(200).send({ontvangen: true});
 });
