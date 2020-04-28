@@ -5,7 +5,7 @@
     "dependencies": {
         "express": "latest",
         "solc": "0.6.6",
-        "body-parser": "latest"
+        "connect-busboy": "latest"
     },
     "main": "index.js",
     "keywords": [],

@@ -1,15 +1,14 @@
 // const solc = require('solc');
-const bodyParser = require('body-parser');
+var busboy = require('connect-busboy');
 const express = require('express');
 const app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
+app.use(busboy());
 
 app.post('/compile', function (req, res) {
-    console.log(req.body);
-    // compile with solidity
+    req.pipe(req.busboy);
+    req.busboy.on('file', function (fieldname, file, filename) {
+        console.log(fieldname + file + filename);
+    });
     res.status(200).send({ontvangen: true});
 });
 
