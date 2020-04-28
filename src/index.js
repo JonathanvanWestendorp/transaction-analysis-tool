@@ -16,7 +16,7 @@ app.post('/compile', function (req, res) {
         var filepath = path.join(__dirname, 'uploads/' + filename);
         file.pipe(fs.createWriteStream(filepath));
         // Maybe this can be simplified..
-        data = fs.readFile(filepath, "utf8", function (err, data) {
+        const code = fs.readFile(filepath, "utf8", function (err, data) {
             if (err) {
                 throw(err);
             }
@@ -27,7 +27,7 @@ app.post('/compile', function (req, res) {
             language: 'Solidity',
             sources: {
                 [filename]: {
-                    content: data
+                    content: code
                 }
             },
             settings: {
