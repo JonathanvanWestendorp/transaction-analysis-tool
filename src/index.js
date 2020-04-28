@@ -5,12 +5,17 @@ const app = express();
 // app.use(express.urlencoded());
 // app.use(express.multipart());
 
+app.get('/compile', function (req, res) {
+    console.log("Huh? a get request...");
+    res.send("RAAR");
+})
+
 app.post('/compile', function (req, res) {
     console.log("Incoming request:");
     var body = req.body;
     console.log(body);
     // compile with solidity
-    res.send(body);
+    res.send("Hij is binnen hoor");
 });
 
 var server = app.listen(3000, function () {
