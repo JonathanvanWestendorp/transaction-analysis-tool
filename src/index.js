@@ -1,13 +1,31 @@
-// const solc = require('solc');
-var busboy = require('connect-busboy');
+const solc = require('solc');
+const fs = require('fs')
 const express = require('express');
 const app = express();
+const busboy = require('connect-busboy');
 app.use(busboy());
 
 app.post('/compile', function (req, res) {
     req.pipe(req.busboy);
-    req.busboy.on('file', function (fieldname, file, filename) {
-        console.log(fieldname + file + filename);
+    req.busboy.on('file', function (file, filename) {
+        var data = fs.readFile(file, "utf8");
+        var input = {
+            language: 'Solidity',
+            sources: {
+                [filename]: {
+                    content: data
+                }
+            },
+            settings: {
+                outputSelection: {
+                    '*': {
+                        '*': ['*']
+                    }
+                }
+            }
+        };
+        var output = JSON.parse(solc.compile(JSON.stringify(input)));
+        console.log(output);
     });
     res.status(200).send({ontvangen: true});
 });
