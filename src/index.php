@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="fileInput">
-      <form class="form" id="contractInput">
+      <form class="form" id="contractForm">
           <div>
             <input type="file" id="contract">
           </div>
@@ -32,23 +32,23 @@
       ?>
     </div>
     <script>
-        const contract = document.getElementById("contractInput");
+      const contractForm = document.getElementById("contractForm");
+      const contract = document.getElementById("contract");
 
-        contractInput.addEventListener("submit", e => {
-          e.preventDefault();
-          
-          const endpoint = window.location.href + "/compile";
-          console.log("Endpoint: " + endpoint);
-          const formData = new FormData();
+      contractForm.addEventListener("submit", e => {
+        e.preventDefault();
+        
+        const endpoint = window.location.href + "compile";
+        const formData = new FormData();
 
-          formData.append("contract", contractInput.files[0]);
+        formData.append("contract", contract.files[0]);
 
-          const response = fetch(endpoint, {
-            method: 'POST',
-            body: formData
-          }).catch(console.error);
-          console.log(response);
-        });
+        const response = fetch(endpoint, {
+          method: 'POST',
+          body: formData
+        }).catch(console.error);
+        console.log(response);
+      });
     </script>
   </body>
 </html>

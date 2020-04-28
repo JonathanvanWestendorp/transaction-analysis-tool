@@ -5,11 +5,6 @@ const app = express();
 // app.use(express.urlencoded());
 // app.use(express.multipart());
 
-app.get('/compile', function (req, res) {
-    console.log("Huh? a get request...");
-    res.send("RAAR");
-})
-
 app.post('/compile', function (req, res) {
     console.log("Incoming request:");
     var body = req.body;
