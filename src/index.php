@@ -37,18 +37,23 @@
 
       contractForm.addEventListener("submit", e => {
         e.preventDefault();
-        
+
         const endpoint = window.location.href.replace(/\/$/, "") + ":3000/compile";
         const formData = new FormData();
 
         formData.append("contract", contract.files[0]);
 
-        const response = fetch(endpoint, {
+        fetch(endpoint, {
           method: 'POST',
           mode: 'no-cors',
           body: formData
-        }).catch(console.error);
-        console.log(response);
+        }).then(function(response) {
+          return response.text();
+        }).then(function(text) {
+          console.log('Request successful', text);
+        }).catch(function(error) {
+          log('Request failed', error)
+        });
       });
     </script>
   </body>
