@@ -48,9 +48,7 @@
           mode: 'no-cors',
           body: formData
         }).then(function(response) {
-          return response.text();
-        }).then(function(text) {
-          console.log('Request successful', text);
+          console.log('Request successful', response);
         }).catch(function(error) {
           log('Request failed', error)
         });
