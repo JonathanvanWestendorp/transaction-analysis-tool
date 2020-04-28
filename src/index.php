@@ -38,7 +38,7 @@
       contractForm.addEventListener("submit", e => {
         e.preventDefault();
         
-        const endpoint = window.location.href + "compile";
+        const endpoint = window.location.href.replace(/\/$/, "") + ":3000/compile";
         const formData = new FormData();
 
         formData.append("contract", contract.files[0]);
