@@ -13,6 +13,8 @@ app.post('/compile', function (req, res) {
     res.send(body);
 });
 
-app.listen(3000, function () {
-    console.log('Example app listening at http://localhost:3000');
+var server = app.listen(3000, function () {
+    var host = server.address().address;
+    var port = server.address().port;
+    console.log('running at http://' + host + ':' + port);
 });
