@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="fileInput">
-      <form action="http://34.68.150.1:3000/compile" method="post">
+      <form class="form" id="contractInput">
           <div>
             <input type="file" id="contract">
           </div>
@@ -31,5 +31,24 @@
         }
       ?>
     </div>
+    <script>
+        const contract = document.getElementById("contractInput");
+
+        contractInput.addEventListener("submit", e => {
+          e.preventDefault();
+          
+          const endpoint = window.location.href + "/compile";
+          console.log("Endpoint: " + endpoint);
+          const formData = new FormData();
+
+          formData.append("contract", contractInput.files[0]);
+
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            body: formData
+          }).catch(console.error);
+          console.log(response);
+        });
+    </script>
   </body>
 </html>
