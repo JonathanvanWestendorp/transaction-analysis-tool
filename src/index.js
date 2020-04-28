@@ -20,7 +20,6 @@ app.post('/compile', function (req, res) {
             if (err) {
                 throw(err);
             }
-            console.log(code);
             var input = {
                 language: 'Solidity',
                 sources: {
@@ -36,13 +35,14 @@ app.post('/compile', function (req, res) {
                     }
                 }
             };
-            var stringifiedInput = JSON.stringify(input);
-            console.log(stringifiedInput);
             var output = JSON.parse(solc.compile(JSON.stringify(input)));
-            console.log(output);
+	        res.set({
+	            "Content-Type": "application/json",
+	            "Access-Control-Allow-Origin": "*"
+	        });
+	        res.send(output);
         });
     });
-    res.status(200).send({ontvangen: true});
 });
 
 app.listen(3000);

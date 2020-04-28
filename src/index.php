@@ -45,12 +45,16 @@
 
         fetch(endpoint, {
           method: 'POST',
-          mode: 'no-cors',
           body: formData
-        }).then(function(response) {
-          console.log('Request successful', response);
-        }).catch(function(error) {
-          log('Request failed', error)
+        })
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(data) {
+	        console.log(data);
+        })
+        .catch(function(error) {
+          log('Request failed', error);
         });
       });
     </script>
