@@ -4,7 +4,8 @@
     "description": "Express handler for contract compilation",
     "dependencies": {
         "express": "latest",
-        "solc": "0.6.6"
+        "solc": "0.6.6",
+        "body-parser": "latest"
     },
     "main": "index.js",
     "keywords": [],
