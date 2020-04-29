@@ -37,12 +37,16 @@
           return response.json();
         })
         .then(function(data) {
-	        data.contracts.forEach(function(file) {
-            file.forEach(function(contract) {
+          console.log(data);
+          Object.entries(data)[0].forEach(function(file) {
+            console.log(file);	
+            Object.entries(file).forEach(function(contract) {
+              console.log(contract);	    
               contract.abi.forEach(function(func) {
                 var btn = document.createElement("BUTTON");
                 btn.innerHTML = func.name;
                 document.body.appendChild(btn);
+
               })
             })
           })
