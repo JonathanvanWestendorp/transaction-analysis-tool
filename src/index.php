@@ -17,9 +17,11 @@
           </div>
       </form>
     </div>
+    <div id="contractList"></div>
     <script>
       const contractForm = document.getElementById("contractForm");
       const contract = document.getElementById("contract");
+      const contractList = document.getElementById("contractList"); 
 
       contractForm.addEventListener("submit", e => {
         e.preventDefault();
@@ -37,22 +39,38 @@
           return response.json();
         })
         .then(function(data) {
-          console.log(data);
-          Object.entries(data)[0].forEach(function(file) {
-            console.log(file);	
-            Object.entries(file).forEach(function(contract) {
-              console.log(contract);	    
-              contract.abi.forEach(function(func) {
-                var btn = document.createElement("BUTTON");
-                btn.innerHTML = func.name;
-                document.body.appendChild(btn);
-
-              })
-            })
-          })
+          for (const file of Object.keys(data.contracts)) {
+            for(const contract of Object.keys(data.contracts[file])) {
+              var contractDiv = document.createElement("div");
+              var contractTitle = document.createElement("H1");
+              var contractTitleText = document.createTextNode(contract);
+              contractTitle.appendChild(contractTitleText);
+              contractDiv.appendChild(contractTitle);
+              for (const func of data.contracts[file][contract]["abi"]) {
+                if (func.type == "function"){
+                  var placeholder = []
+                  for (const input of func.inputs) {
+                    placeholder.push([input.internalType, input.name].join(' '));
+                  }
+                  var functionCall = document.createElement('form');
+                  functionCall.setAttribute('ID', func.name);
+                  var params = document.createElement('input');
+                  params.setAttribute('type', 'text');
+                  params.setAttribute('placeholder', placeholder.join(', '))
+                  var button = document.createElement('input');
+                  button.setAttribute('type', 'submit');
+                  button.setAttribute('value', func.name);
+                  functionCall.appendChild(button);
+                  functionCall.appendChild(params);
+                  contractDiv.appendChild(functionCall);
+                }
+              }
+              contractList.appendChild(contractDiv)
+            }
+          }
         })
         .catch(function(error) {
-          log('Request failed', error);
+          console.log('Request failed', error);
         });
       });
     </script>

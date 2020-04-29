@@ -36,11 +36,11 @@ app.post('/compile', function (req, res) {
                 }
             };
             var output = JSON.parse(solc.compile(JSON.stringify(input)));
-	        res.set({
-	            "Content-Type": "application/json",
-	            "Access-Control-Allow-Origin": "*"
-	        });
-	        res.send(output);
+            res.set({
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            });
+            res.send(output);
         });
     });
 });
