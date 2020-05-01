@@ -10,5 +10,5 @@ fi
 TOOLPATH=$( dirname "$PWD" )
 echo $TOOLPATH
 echo "Building web tool..." 
-docker build -t tx-tool $TOOLPATH && docker run --name=tx-tool -d -p 80:80 -p 3000:3000 tx-tool
+docker build -t tx-tool $TOOLPATH && docker run --name=tx-tool --net="host" -d -p 80:80 -p 3000:3000 tx-tool
 echo "Done!"

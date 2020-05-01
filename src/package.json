@@ -5,7 +5,8 @@
     "dependencies": {
         "express": "latest",
         "solc": "0.6.6",
-        "connect-busboy": "latest"
+        "connect-busboy": "latest",
+        "docker-host-ip": "latest"
     },
     "main": "index.js",
     "keywords": [],

@@ -11,6 +11,7 @@
       <form class="form" id="contractForm">
           <div>
             <input type="file" id="contract">
+            <input type="text" id="contractAddress">
           </div>
           <div>
             <input type="submit" value="Submit">
@@ -26,7 +27,8 @@
       contractForm.addEventListener("submit", e => {
         e.preventDefault();
 
-        const endpoint = window.location.href.replace(/\/$/, "") + ":3000/compile";
+        // const endpoint = window.location.href.replace(/\/$/, "") + ":3000/compile";
+        const endpoint = "localhost:3000/compile";
         const formData = new FormData();
 
         formData.append("contract", contract.files[0]);
@@ -47,16 +49,20 @@
               contractTitle.appendChild(contractTitleText);
               contractDiv.appendChild(contractTitle);
               for (const func of data.contracts[file][contract]["abi"]) {
-                if (func.type == "function"){
+                if (func.type == "function") {
                   var placeholder = []
                   for (const input of func.inputs) {
                     placeholder.push([input.internalType, input.name].join(' '));
                   }
                   var functionCall = document.createElement('form');
                   functionCall.setAttribute('ID', func.name);
+                  functionCall.setAttribute('name', func.name);
+                  functionCall.setAttribute('action', "execute.php");
+                  functionCall.setAttribute('method', "post");
                   var params = document.createElement('input');
                   params.setAttribute('type', 'text');
-                  params.setAttribute('placeholder', placeholder.join(', '))
+                  params.setAttribute('name', 'params');
+                  params.setAttribute('placeholder', placeholder.join(', '));
                   var button = document.createElement('input');
                   button.setAttribute('type', 'submit');
                   button.setAttribute('value', func.name);
@@ -65,7 +71,7 @@
                   contractDiv.appendChild(functionCall);
                 }
               }
-              contractList.appendChild(contractDiv)
+              contractList.appendChild(contractDiv);
             }
           }
         })
