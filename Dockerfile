@@ -6,6 +6,8 @@ RUN apt-get -y install curl gnupg vim git
 RUN curl -sL https://deb.nodesource.com/setup_10.x  | bash -
 RUN apt-get -y install nodejs
 RUN npm install
+RUN docker-php-ext-configure gmp 
+RUN docker-php-ext-install gmp
 RUN mkdir bin
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 RUN php composer-setup.php --install-dir=bin --filename=composer
