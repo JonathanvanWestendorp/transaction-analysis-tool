@@ -63,15 +63,16 @@
                   params.setAttribute('name', 'params');
                   params.setAttribute('placeholder', placeholder.join(', '));
                   var contractAddress = document.createElement('input');
-                  params.setAttribute('type', 'hidden');
-                  params.setAttribute('name', 'contractAddress');
-                  button.setAttribute('value', address);
+                  contractAddress.setAttribute('type', 'hidden');
+                  contractAddress.setAttribute('name', 'contractAddress');
+                  contractAddress.setAttribute('value', address);
                   var button = document.createElement('input');
                   button.setAttribute('type', 'submit');
                   button.setAttribute('name', 'functionName')
                   button.setAttribute('value', func.name);
-                  functionCall.appendChild(button);
                   functionCall.appendChild(params);
+                  functionCall.appendChild(contractAddress);
+                  functionCall.appendChild(button);
                   contractDiv.appendChild(functionCall);
                 }
               }
