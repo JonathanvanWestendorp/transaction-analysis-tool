@@ -3,7 +3,7 @@
 require __DIR__ . '/vendor/autoload.php';
 use Ethereum\Ethereum;
 
-echo($_POST);
+print_r($_POST);
 
 $rpcRequest = 
 [

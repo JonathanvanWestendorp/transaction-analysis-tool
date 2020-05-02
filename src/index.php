@@ -8,10 +8,10 @@
   </head>
   <body>
     <div class="fileInput">
-      <form class="form" id="contractForm" action="execute.php" method="post">
+      <form class="form" id="contractForm">
           <div>
             <input type="file" id="contract">
-            <input type="text" name="contractAddress" placeholder="Contract Address">
+            <input type="text" id="contractAddress" placeholder="Contract Address">
           </div>
           <div>
             <input type="submit" value="Submit">
@@ -20,9 +20,10 @@
     </div>
     <div id="contractList"></div>
     <script>
-      const contractForm = document.getElementById("contractForm");
       const contract = document.getElementById("contract");
-      const contractList = document.getElementById("contractList"); 
+      const contractForm = document.getElementById("contractForm");
+      const contractList = document.getElementById("contractList");
+      const address = document.getElementById("contractAddress").value;
 
       contractForm.addEventListener("submit", e => {
         e.preventDefault();
@@ -55,15 +56,19 @@
                   }
                   var functionCall = document.createElement('form');
                   functionCall.setAttribute('ID', func.name);
-                  functionCall.setAttribute('name', func.name);
                   functionCall.setAttribute('action', "execute.php");
                   functionCall.setAttribute('method', "post");
                   var params = document.createElement('input');
                   params.setAttribute('type', 'text');
                   params.setAttribute('name', 'params');
                   params.setAttribute('placeholder', placeholder.join(', '));
+                  var contractAddress = document.createElement('input');
+                  params.setAttribute('type', 'hidden');
+                  params.setAttribute('name', 'contractAddress');
+                  button.setAttribute('value', address);
                   var button = document.createElement('input');
                   button.setAttribute('type', 'submit');
+                  button.setAttribute('name', 'functionName')
                   button.setAttribute('value', func.name);
                   functionCall.appendChild(button);
                   functionCall.appendChild(params);
