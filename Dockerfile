@@ -6,7 +6,5 @@ RUN apt-get -y install curl gnupg vim
 RUN curl -sL https://deb.nodesource.com/setup_10.x  | bash -
 RUN apt-get -y install nodejs
 RUN npm install
-RUN docker-php-ext-configure gmp 
-RUN docker-php-ext-install gmp
 RUN mkdir bin
 # CMD node index.js
