@@ -48,24 +48,26 @@ app.post('/compile', function (req, res) {
 });
 
 app.post('/execute', function (req, res) {
-    const params = req.body.params;
-    console.log(params);
+    const params = req.body.params.replace(/\s/g, '').split(",");
     const paramTypes = req.body.paramTypes;
-    console.log(paramTypes);
     const functionName = req.body.functionName;
-    console.log(functionName);
     const contractAddress = req.body.contractAddress;
-    console.log(contractAddress);
 
-    // const encFunctionSignature = abi.encodeFunctionSignature(functionName + "(" + ")");
+    const FunctionSignature = functionName + "(" + paramTypes + ")";
+    console.log("signature: " + FunctionSignature);
     
-    // if (Array.isArray(paramTypes)) {
-    //     const encParameters = abi.encodeParameters();
-    // } else {
-    //     const encParameters = abi.encodeParameter();
-    // }
+    const encFunctionSignature = abi.encodeFunctionSignature(FunctionSignature);
+    console.log("enc signature" + encFunctionSignature);
+
+    var encParameters
+    if (params.length > 1) {
+        encParameters = abi.encodeParameters(paramTypes.replace(/\s/g, '').split(","), params);
+    } else {
+        encParameters = abi.encodeParameter(paramTypes, params[0]);
+    }
     
-    // const encodedCall = encFunctionSignature + encParameters;
+    const encodedCall = encFunctionSignature + encParameters;
+    console.log(encodedCall);
 
     // var rpcCall = {
     //     jsonrpc: "2.0",
