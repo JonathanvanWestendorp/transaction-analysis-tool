@@ -1,6 +1,7 @@
 const fs = require('fs')
 const solc = require('solc');
 const path = require('path');
+const axios = require('axios');
 const express = require('express');
 const abi = require('web3-eth-abi');
 const busboy = require('connect-busboy');
@@ -54,10 +55,7 @@ app.post('/execute', function (req, res) {
     const contractAddress = req.body.contractAddress;
 
     const FunctionSignature = functionName + "(" + paramTypes + ")";
-    console.log("signature: " + FunctionSignature);
-    
     const encFunctionSignature = abi.encodeFunctionSignature(FunctionSignature);
-    console.log("enc signature" + encFunctionSignature);
 
     var encParameters
     if (params.length > 1) {
@@ -67,17 +65,24 @@ app.post('/execute', function (req, res) {
     }
     
     const encodedCall = encFunctionSignature + encParameters;
-    console.log(encodedCall);
 
-    // var rpcCall = {
-    //     jsonrpc: "2.0",
-    //     method: "eth_sendTransaction",
-    //     id: 1,
-    //     params: {
-    //         to: contractAddress,
-    //         data: encodedCall
-    //     }
-    // };
+    var rpcCall = {
+        jsonrpc: "2.0",
+        method: "eth_sendTransaction",
+        id: 1,
+        params: {
+            to: contractAddress,
+            data: encodedCall
+        }
+    };
+
+    axios.post('localhost:5000', rpcCall).then(function (evmRes) {
+        console.log(evmRes);
+    })
+    .catch(function (error) {
+        console.error(error)
+    });
+
 });
 
 app.listen(3000);
