@@ -76,7 +76,7 @@ app.post('/execute', function (req, res) {
         }
     };
 
-    axios.post('localhost:5000', {
+    request.post('localhost:5000', {
         json: rpcCall
     }, function (error, evmRes, evmBody) {
         if (error) {
