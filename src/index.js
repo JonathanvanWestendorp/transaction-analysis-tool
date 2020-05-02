@@ -6,6 +6,9 @@ const express = require('express');
 const abi = require('web3-eth-abi');
 const busboy = require('connect-busboy');
 const app = express();
+
+const ledgerEndpoint = "http://localhost:5000"
+
 app.use(busboy());
 app.use(express.urlencoded());
 
@@ -64,9 +67,9 @@ app.post('/execute', function (req, res) {
         encParameters = abi.encodeParameter(paramTypes, params[0]);
     }
     
-    const encodedCall = encFunctionSignature + encParameters;
+    const encodedCall = encFunctionSignature + encParameters.replace('0x','');
 
-    var rpcCall = {
+    var rpcSendTransaction = {
         jsonrpc: "2.0",
         method: "eth_sendTransaction",
         id: 1,
@@ -76,8 +79,21 @@ app.post('/execute', function (req, res) {
         }
     };
 
-    axios.post('http://localhost:5000', rpcCall).then(function (evmRes) {
-        console.log(evmRes);
+    axios.post(ledgerEndpoint, rpcSendTransaction).then(function (txRes) {
+        const recieptHash = txRes.data.result;
+        const rpcGetReciept = {
+            jsonrpc: "2.0",
+            method: "eth_getTransactionReceipt",
+            id: 1,
+            params: recieptHash
+        }
+        axios.post(ledgerEndpoint, rpcGetReciept).then(function (recieptRes) {
+            console.log(recieptRes.data);
+        })
+        .catch(function (error) {
+        console.error(error)
+        });
+
     })
     .catch(function (error) {
         console.error(error)
