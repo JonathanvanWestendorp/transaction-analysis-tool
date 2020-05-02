@@ -1,5 +1,8 @@
 <?php
 
+require __DIR__ . '/vendor/autoload.php';
+use Ethereum\Ethereum;
+
 $call = encode($_POST(...));
 
 $rpcRequest = 
