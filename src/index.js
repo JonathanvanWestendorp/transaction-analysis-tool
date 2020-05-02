@@ -1,7 +1,7 @@
 const fs = require('fs')
 const solc = require('solc');
 const path = require('path');
-const axios = require('axios');
+const request = require('request');
 const express = require('express');
 const abi = require('web3-eth-abi');
 const busboy = require('connect-busboy');
@@ -76,13 +76,15 @@ app.post('/execute', function (req, res) {
         }
     };
 
-    axios.post('localhost:5000', rpcCall).then(function (evmRes) {
-        console.log(evmRes);
-    })
-    .catch(function (error) {
-        console.error(error)
+    axios.post('localhost:5000', {
+        json: rpcCall
+    }, function (error, evmRes, evmBody) {
+        if (error) {
+            console.log(error);
+            return
+        }
+        console.log(evmBody)
     });
-
 });
 
 app.listen(3000);
