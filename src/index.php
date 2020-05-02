@@ -23,17 +23,21 @@
       const contract = document.getElementById("contract");
       const contractForm = document.getElementById("contractForm");
       const contractList = document.getElementById("contractList");
-      const address = document.getElementById("contractAddress").value;
 
       contractForm.addEventListener("submit", e => {
         e.preventDefault();
 
-        const endpoint = window.location.href.replace(/\/$/, "") + ":3000/compile";
+        const address = document.getElementById("contractAddress").value;
+
+        const currentIp = window.location.href.replace(/\/$/, "");
+        const endpointCompile = currentIp + ":3000/compile";
+        const endpointExecute = currentIp + ":3000/execute";
+
         const formData = new FormData();
 
         formData.append("contract", contract.files[0]);
 
-        fetch(endpoint, {
+        fetch(endpointCompile, {
           method: 'POST',
           body: formData
         })
@@ -50,13 +54,15 @@
               contractDiv.appendChild(contractTitle);
               for (const func of data.contracts[file][contract]["abi"]) {
                 if (func.type == "function") {
-                  var placeholder = []
+                  var types = [];
+                  var placeholder = [];
                   for (const input of func.inputs) {
+                    types.push(input.internalType);
                     placeholder.push([input.internalType, input.name].join(' '));
                   }
                   var functionCall = document.createElement('form');
                   functionCall.setAttribute('ID', func.name);
-                  functionCall.setAttribute('action', "execute.php");
+                  functionCall.setAttribute('action', endpointExecute);
                   functionCall.setAttribute('method', "post");
                   var params = document.createElement('input');
                   params.setAttribute('type', 'text');
@@ -66,13 +72,18 @@
                   contractAddress.setAttribute('type', 'hidden');
                   contractAddress.setAttribute('name', 'contractAddress');
                   contractAddress.setAttribute('value', address);
+                  var paramTypes = document.createElement('input');
+                  paramTypes.setAttribute('type', 'hidden');
+                  paramTypes.setAttribute('name', 'paramTypes');
+                  paramTypes.setAttribute('value', types);
                   var button = document.createElement('input');
                   button.setAttribute('type', 'submit');
                   button.setAttribute('name', 'functionName')
                   button.setAttribute('value', func.name);
+                  functionCall.appendChild(button);
                   functionCall.appendChild(params);
                   functionCall.appendChild(contractAddress);
-                  functionCall.appendChild(button);
+                  functionCall.appendChild(paramTypes);
                   contractDiv.appendChild(functionCall);
                 }
               }
