@@ -9,5 +9,6 @@ RUN npm install
 RUN mkdir bin
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 RUN php composer-setup.php --install-dir=bin --filename=composer
-Run php -r "unlink('composer-setup.php');"
+RUN php -r "unlink('composer-setup.php');"
+RUN bin/composer install
 # CMD node index.js
