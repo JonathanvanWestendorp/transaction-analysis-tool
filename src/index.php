@@ -8,10 +8,10 @@
   </head>
   <body>
     <div class="fileInput">
-      <form class="form" id="contractForm">
+      <form class="form" id="contractForm" action="execute.php" method="post">
           <div>
             <input type="file" id="contract">
-            <input type="text" id="contractAddress">
+            <input type="text" name="contractAddress" placeholder="Contract Address">
           </div>
           <div>
             <input type="submit" value="Submit">
@@ -27,8 +27,7 @@
       contractForm.addEventListener("submit", e => {
         e.preventDefault();
 
-        // const endpoint = window.location.href.replace(/\/$/, "") + ":3000/compile";
-        const endpoint = "localhost:3000/compile";
+        const endpoint = window.location.href.replace(/\/$/, "") + ":3000/compile";
         const formData = new FormData();
 
         formData.append("contract", contract.files[0]);
