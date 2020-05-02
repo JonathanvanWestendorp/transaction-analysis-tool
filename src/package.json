@@ -7,7 +7,8 @@
         "solc": "0.6.6",
         "connect-busboy": "latest",
         "docker-host-ip": "latest",
-        "web3-eth-abi": "latest"
+        "web3-eth-abi": "latest",
+        "request": "latest"
     },
     "main": "index.js",
     "keywords": [],
